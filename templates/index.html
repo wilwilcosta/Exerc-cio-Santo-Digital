@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Sistema de Cadastro</title>
+{% endblock %}
+
+{% block body %}
+<div class="cadastro">
+    <h1 style="text-align: center">Sistema de Cadastro</h1>
+    {% if tasks|length < 1 %}
+    <h4 style="text-align: center">Não há ninguém cadastrado...<br>
+        Venha ser o primeiro! :)</h4>
+    {% else %}
+
+    <center><table border="1">
+        <tr>
+            <th>Nome</th>
+            <th>Endereço</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th>Ações</th>
+        </tr>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.nome }}</td>
+                <td>{{ task.endereco }}</td>
+                <td>{{ task.telefone }}</td>
+                <td>{{task.email }}</td>
+                <td>
+                    <a href="/deletar/{{ task.id }}">Deletar</a>
+                    <br>Ou
+                    <br><a href="/atualizar/{{task.id}}">Atualizar</a>
+                </td>
+        </tr>
+        {% endfor %}
+    </table></center>
+    {% endif %}
+
+    <center><br>
+        <form action="/" method="POST">
+           Nome: <input type="text" name="nome" id="nome">
+             <p><br></p>
+            Endereço:<input type="text" name="endereco" id="endereco">
+             <p><br></p>
+            Telefone:<input type="number" name="telefone" id="telefone">
+             <p><br></p>
+            Email:<input type="text" name="email" id="email">
+            <p><br></p>
+            <input type="submit" value="Cadastrar">
+    </form>
+    </center>
+</div>
+{% endblock %}
